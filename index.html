@@ -2,231 +2,314 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>عيد ميلاد حنان</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
-/* ===== Design tokens (edit colors here) ===== */
+/* ===== Royal design system ===== */
 :root{
-  --pink:#E9A9CA; --light:#FFF2F8; --rose:#B65E91; --lav:#E8DCF2;
-  --purple:#9274B6; --plum:#604476; --silver:#D9C9E2; --white:#FFFDFD; --text:#392844;
+  --royal:#4B176D; --plum:#321047; --violet:#7138A0; --pink:#E7549A; --blush:#F8C8DC;
+  --lav:#DCC6F4; --gold:#D8B46A; --silver:#E7E2EE; --pearl:#FFF9FD;
+  --flame:#F08A2C; --bamboo:#6E9C6B;               /* Ace / Nezuko accents, used sparingly */
   --serif:'Amiri','Noto Naskh Arabic','Traditional Arabic',Tahoma,serif;
   --latin:'Playfair Display',Georgia,serif;
+  --hand:'Dancing Script','Brush Script MT',cursive;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
 html,body{overflow-x:hidden}
-body{font-family:var(--serif);color:var(--text);line-height:1.7;font-size:1.15rem;
-  background:linear-gradient(160deg,var(--light),var(--lav))}
+body{font-family:var(--serif);color:var(--plum);font-size:1.15rem;line-height:1.7;min-height:100svh;
+  background:radial-gradient(ellipse at 50% 0%,var(--violet) 0%,var(--royal) 45%,var(--plum) 100%) fixed}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;opacity:.5;background:radial-gradient(circle,rgba(255,255,255,.7) 0 1px,transparent 2px) 0 0/90px 90px,radial-gradient(circle,rgba(216,180,106,.8) 0 1px,transparent 2px) 45px 30px/130px 130px}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.07;
+  background:repeating-linear-gradient(60deg,var(--gold) 0 1px,transparent 1px 28px),repeating-linear-gradient(-60deg,var(--gold) 0 1px,transparent 1px 28px)}
 button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
-:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
-
-/* decorative florals */
-.bg{position:fixed;inset:0;pointer-events:none;color:var(--rose);opacity:.16;z-index:0}
-.bg span{position:absolute;font-size:4rem;line-height:1}
-.bg span:nth-child(1){top:2%;right:4%}.bg span:nth-child(2){top:2%;left:4%}
-.bg span:nth-child(3){bottom:2%;right:4%}.bg span:nth-child(4){bottom:2%;left:4%}
-
-.page{display:none;min-height:100vh;min-height:100svh;padding:28px 16px;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;position:relative;z-index:1}
-.page.active{display:flex;animation:fadeIn .7s ease both}
-@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-
-.card{width:min(640px,100%);background:rgba(255,253,253,.85);border:1px solid var(--silver);
-  border-radius:28px;padding:30px 18px;box-shadow:0 16px 44px rgba(96,68,118,.13)}
-h1,h2{color:var(--plum);font-weight:700;line-height:1.35}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.page{display:none;min-height:100svh;padding:34px 14px;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;position:relative;z-index:1}
+.page.active{display:flex;animation:enter .8s ease both}
+.page.out{animation:leave .6s ease both}
+@keyframes enter{from{opacity:0;transform:translateY(22px) scale(.985);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@keyframes leave{to{opacity:0;transform:translateY(-18px) scale(1.01);filter:blur(4px)}}
+.card{width:min(680px,100%);padding:32px 18px 28px;border-radius:26px;position:relative;
+  background:linear-gradient(160deg,var(--pearl),#F6E4F2);border:1px solid var(--gold);
+  box-shadow:0 0 0 5px rgba(255,249,253,.18),0 0 0 6px var(--gold),0 26px 60px rgba(20,4,35,.55)}
+.card::after{content:'';position:absolute;inset:8px;border:1px solid rgba(216,180,106,.55);border-radius:19px;pointer-events:none}
+.card::before{content:'♛';position:absolute;top:-18px;left:50%;translate:-50% 0;width:34px;height:34px;line-height:32px;
+  border-radius:50%;background:var(--royal);color:var(--gold);border:1px solid var(--gold);font-size:1.1rem}
+h1,h2{color:var(--royal);font-weight:700;line-height:1.35}
 h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:clamp(1.7rem,6vw,2.4rem)}
-.orn{color:var(--silver);letter-spacing:.6rem;margin:6px 0;font-size:1.1rem}
-.sub{color:var(--plum);opacity:.85;margin:4px 0 8px}
-.small{font-size:1.1rem;color:var(--rose);font-weight:700}
-.hint{min-height:2.2em;color:var(--plum);margin-top:8px;font-weight:700}
-
-.btn{margin-top:20px;padding:11px 30px;border-radius:999px;border:1px solid var(--plum);
-  background:var(--plum);color:var(--white);font-size:1.15rem;font-weight:700;
-  box-shadow:0 8px 20px rgba(96,68,118,.22);transition:transform .25s,background .25s}
-.btn:hover:not(:disabled){transform:translateY(-2px);background:var(--purple)}
+.sub{color:var(--violet);margin:4px 0 10px}
+.small{color:var(--pink);font-weight:700}
+.hint{min-height:2.2em;color:var(--royal);margin-top:8px;font-weight:700}
+.orn{color:var(--gold);letter-spacing:.5rem;font-size:1.05rem}
+.icons{display:flex;justify-content:center;gap:14px;margin:6px 0}
+.ic{width:36px;height:36px}.ic.sm{width:26px;height:26px}
+.crest{width:68px;height:68px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;
+  background:conic-gradient(from 200deg,var(--flame),var(--pink),var(--violet),var(--bamboo),var(--flame));
+  box-shadow:0 0 0 3px var(--gold),0 10px 24px rgba(50,16,71,.35)}
+.crest span{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:var(--plum);color:var(--gold);font-size:1.7rem}
+.btn{margin-top:18px;padding:11px 28px;border-radius:999px;border:2px solid var(--gold);color:var(--pearl);
+  background:linear-gradient(135deg,var(--pink),var(--violet));font-size:1.12rem;font-weight:700;
+  box-shadow:0 8px 20px rgba(75,23,109,.3);transition:transform .25s}
+.btn:hover:not(:disabled){transform:translateY(-2px)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.alt{background:var(--white);color:var(--plum);border-color:var(--silver)}
+.btn.flame{background:linear-gradient(135deg,var(--flame),#F6B25A)}
+.btn.bamboo{background:linear-gradient(135deg,#86B382,var(--bamboo))}
+.btn.ghost{background:transparent;color:var(--royal);border-color:var(--violet);box-shadow:none}
 .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 
-/* ===== Page 1: flower buttons ===== */
-.arena{position:relative;width:min(420px,100%);height:320px;margin:12px auto 0}
+/* 1. flowers */
+.arena{position:relative;width:min(420px,100%);height:320px;margin:10px auto 0}
 .flower{position:absolute;width:104px;height:104px;border:0;background:none;padding:0;
   transition:left .8s cubic-bezier(.5,0,.2,1),top .8s cubic-bezier(.5,0,.2,1),scale .25s}
 .flower:hover{scale:1.06}
-.petal{position:absolute;left:32%;top:2%;width:36%;height:48%;border-radius:50%;
-  transform-origin:50% 100%;background:var(--pink);box-shadow:inset 0 -4px 8px rgba(96,68,118,.14)}
-.petal:nth-child(even){background:var(--silver)}
-.core{position:absolute;inset:27%;border-radius:50%;background:var(--white);display:grid;place-items:center;
-  font-size:1.2rem;font-weight:700;color:var(--plum);box-shadow:0 2px 8px rgba(96,68,118,.25)}
+.flower.yes-big{width:138px;height:138px;z-index:2;scale:1.08;filter:drop-shadow(0 0 16px rgba(231,84,154,.55))}
+.petal{position:absolute;left:32%;top:2%;width:36%;height:48%;border-radius:50%;transform-origin:50% 100%;
+  background:var(--pink);box-shadow:inset 0 -4px 8px rgba(50,16,71,.18)}
+.petal:nth-child(even){background:linear-gradient(var(--silver),var(--lav))}
+.core{position:absolute;inset:27%;border-radius:50%;background:var(--pearl);display:grid;place-items:center;
+  font-size:1.2rem;font-weight:700;color:var(--royal);box-shadow:0 2px 8px rgba(50,16,71,.3)}
 
-/* ===== Page 2: royal door ===== */
-.scene{position:relative;width:min(300px,78vw);height:min(400px,52svh);margin:18px auto 6px;perspective:1100px;
-  border:0;background:none;padding:0;display:block}
-.arch{position:absolute;inset:0;border-radius:150px 150px 8px 8px;
-  background:radial-gradient(circle at 50% 45%,var(--white),var(--pink) 110%);
-  box-shadow:0 0 0 8px var(--silver),0 18px 40px rgba(96,68,118,.25)}
-.leaf{position:absolute;top:0;bottom:0;width:50%;display:block;
-  background:linear-gradient(160deg,var(--purple),var(--plum));
-  transition:transform 1.4s cubic-bezier(.4,0,.2,1)}
-.leaf.l{left:0;border-radius:150px 0 0 8px;transform-origin:left center}
-.leaf.r{right:0;border-radius:0 150px 8px 0;transform-origin:right center}
-.leaf::before{content:'';position:absolute;inset:12% 12% 10%;border:2px solid var(--silver);border-radius:10px 10px 4px 4px;opacity:.75}
-.leaf::after{content:'';position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:var(--silver);
-  box-shadow:0 0 0 3px rgba(255,253,253,.4)}
+/* 2. door */
+.door-row{display:flex;align-items:flex-end;justify-content:center;gap:10px}
+.scene{position:relative;width:min(250px,60vw);height:min(360px,46svh);margin:12px 0;perspective:1100px;border:0;background:none;padding:0;display:block}
+.arch{position:absolute;inset:0;border-radius:125px 125px 8px 8px;background:radial-gradient(circle at 50% 45%,var(--pearl),var(--blush) 110%);
+  box-shadow:0 0 0 7px var(--gold),0 18px 40px rgba(50,16,71,.45)}
+.leaf{position:absolute;top:0;bottom:0;width:50%;display:block;background:linear-gradient(160deg,var(--violet),var(--plum));transition:transform 1.4s cubic-bezier(.4,0,.2,1)}
+.leaf.l{left:0;border-radius:125px 0 0 8px;transform-origin:left center}
+.leaf.r{right:0;border-radius:0 125px 8px 0;transform-origin:right center}
+.leaf::before{content:'';position:absolute;inset:12% 12% 10%;border:2px solid var(--gold);border-radius:10px 10px 4px 4px;opacity:.7}
+.leaf::after{content:'';position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:var(--gold)}
 .leaf.l::after{right:10px}.leaf.r::after{left:10px}
 .scene.open .leaf.l{transform:rotateY(-108deg)}.scene.open .leaf.r{transform:rotateY(108deg)}
+.torch{animation:flick 1.1s ease-in-out infinite alternate;transform-origin:50% 100%}
+@keyframes flick{to{transform:scale(1.1) rotate(4deg)}}
 
-/* ===== Page 3: balloons ===== */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(520px,100%);margin-top:14px}
-.cell{min-height:200px;display:grid;place-items:center}
-.balloon{width:108px;height:136px;border:0;border-radius:50% 50% 46% 46%;color:var(--white);font-weight:700;
-  font-size:1.05rem;box-shadow:inset -10px -14px 22px rgba(96,68,118,.2),0 12px 24px rgba(96,68,118,.2);
-  animation:bob 3.4s ease-in-out infinite alternate;position:relative}
-.balloon::after{content:'';position:absolute;left:50%;bottom:-44px;width:1px;height:44px;background:var(--purple)}
-.cell:nth-child(1) .balloon{background:var(--rose)}.cell:nth-child(2) .balloon{background:var(--purple)}
-.cell:nth-child(3) .balloon{background:var(--pink);color:var(--plum)}.cell:nth-child(4) .balloon{background:var(--plum)}
+/* 3. balloons: one in each corner of the page */
+#balloons{min-height:max(100svh,640px)}
+#balloonGrid{position:absolute;inset:0;pointer-events:none;z-index:3}
+.cell{position:absolute;width:min(46vw,230px);height:212px;display:grid;place-items:center;pointer-events:auto}
+.cell:nth-child(1){top:10px;right:6px}.cell:nth-child(2){top:10px;left:6px}
+.cell:nth-child(3){bottom:10px;right:6px}.cell:nth-child(4){bottom:10px;left:6px}
+.balloon{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:106px;height:130px;border:0;
+  color:var(--pearl);font-weight:700;border-radius:50% 50% 48% 48%/58% 58% 42% 42%;background:var(--c);text-shadow:0 1px 3px rgba(0,0,0,.45);
+  box-shadow:inset -12px -16px 24px rgba(50,16,71,.28),inset 10px 12px 18px rgba(255,255,255,.35),0 14px 26px rgba(20,4,35,.45);
+  animation:bob 3.4s ease-in-out infinite alternate}
+.balloon::before{content:'';position:absolute;bottom:-8px;left:50%;margin-left:-6px;width:12px;height:9px;background:var(--k);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.balloon::after{content:'';position:absolute;left:50%;bottom:-50px;width:1px;height:42px;background:var(--gold)}
+.balloon svg{width:48px;height:34px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.cell:nth-child(1) .balloon{--c:linear-gradient(160deg,#F7A8C9,var(--pink));--k:var(--pink)}
+.cell:nth-child(2) .balloon{--c:linear-gradient(160deg,#A57BD0,var(--violet));--k:var(--violet)}
+.cell:nth-child(3) .balloon{--c:linear-gradient(160deg,#80B879,#176C45 55%,#102D22);--k:#176C45}
+.cell:nth-child(4) .balloon{--c:linear-gradient(160deg,#F6B25A,var(--flame) 55%,#C95B14);--k:var(--flame)}
 .cell:nth-child(even) .balloon{animation-delay:-1.6s}
-@keyframes bob{to{transform:translateY(-12px)}}
-.msg{width:100%;padding:16px 12px;border:1px solid var(--silver);border-radius:22px;background:var(--white);
-  color:var(--plum);font-size:1.08rem;line-height:1.7;animation:fadeIn .6s ease both}
+@keyframes bob{to{transform:translateY(-10px)}}
+.verse{font-size:clamp(.85rem,3.3vw,1.05rem);line-height:1.95;font-weight:700}
+.msg{width:100%;height:100%;display:grid;place-items:center;padding:8px;border:1px solid var(--gold);border-radius:20px;background:var(--pearl);
+  color:var(--royal);animation:enter .6s ease both}
 
-/* ===== Page 4: HANANE letters ===== */
-.letters{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:18px 0}
-.badge{width:60px;height:60px;border-radius:50%;border:2px solid var(--silver);background:var(--white);
-  color:var(--plum);font:700 1.7rem var(--latin);box-shadow:0 6px 16px rgba(96,68,118,.15);
-  transition:transform .25s,background .25s}
+/* 5. HANANE */
+.letters{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:16px 0}
+.badge{width:58px;height:58px;border-radius:50%;border:2px solid var(--gold);background:var(--pearl);color:var(--royal);
+  font:700 1.6rem var(--latin);box-shadow:0 6px 16px rgba(50,16,71,.25);transition:transform .25s,background .25s}
 .badge:hover{transform:translateY(-4px)}
-.badge.done{background:var(--pink);border-color:var(--rose);color:var(--white)}
-.lettermsg{min-height:96px;display:grid;place-items:center;padding:16px;border:1px solid var(--silver);
-  border-radius:22px;background:var(--white);color:var(--plum);font-size:1.2rem}
+.badge.done{background:linear-gradient(135deg,var(--pink),var(--violet));color:var(--pearl)}
+.badge.done[data-k=a]{background:linear-gradient(135deg,var(--flame),#C95B14)}
+.badge.done[data-k=n]{background:linear-gradient(135deg,#86B382,var(--bamboo))}
+.lettermsg{min-height:74px;display:grid;place-items:center;padding:14px 16px;border:1px solid var(--gold);border-radius:18px;background:linear-gradient(145deg,#fffafd,#f4e6f4);color:var(--royal);font-size:1.08rem;font-weight:700;box-shadow:inset 0 0 18px rgba(216,180,106,.12);transition:opacity .3s,transform .3s}
 
-/* ===== Page 5: cake ===== */
-.cake{display:flex;flex-direction:column;align-items:center;margin:62px 0 14px}
-.t1,.t2{position:relative;border-radius:14px 14px 6px 6px;border-bottom:6px dotted var(--silver)}
-.t1{width:130px;height:58px;background:linear-gradient(var(--light),var(--pink))}
-.t2{width:210px;height:76px;background:linear-gradient(var(--light),var(--rose));border-radius:6px 6px 16px 16px}
-.plate{width:250px;height:12px;border-radius:50%;background:var(--silver);box-shadow:0 8px 14px rgba(96,68,118,.2)}
+/* 8. cake */
+.cake{display:flex;flex-direction:column;align-items:center;margin:60px 0 12px}
+.t1,.t2{position:relative;border-bottom:6px dotted var(--gold)}
+.t1{width:130px;height:58px;border-radius:14px 14px 6px 6px;background:linear-gradient(var(--blush),var(--pink))}
+.t2{width:210px;height:76px;border-radius:6px 6px 16px 16px;background:linear-gradient(var(--pink),var(--royal))}
+.t2::before{content:'';position:absolute;left:0;right:0;top:30px;height:12px;background:conic-gradient(#1E4D3B 25%,#17231D 0 50%,#1E4D3B 0 75%,#17231D 0) 0 0/12px 12px}
+.plate{width:250px;height:12px;border-radius:50%;background:linear-gradient(var(--silver),var(--gold));box-shadow:0 8px 14px rgba(50,16,71,.3)}
 .candles{position:absolute;top:-36px;left:0;right:0;display:flex;justify-content:space-evenly}
-.candle{width:8px;height:34px;border-radius:3px;background:var(--purple);position:relative}
-.candle::after{content:'';position:absolute;left:50%;top:-15px;width:10px;height:15px;margin-left:-5px;
-  border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:#FFD98A;box-shadow:0 0 8px #FFD98A;
-  transform:scale(0);transition:transform .3s}
+.candle{width:8px;height:34px;border-radius:3px;background:var(--gold);position:relative}
+.candle::after{content:'';position:absolute;left:50%;top:-16px;width:10px;height:16px;margin-left:-5px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;
+  background:linear-gradient(var(--flame),#FFD27A);box-shadow:0 0 10px var(--flame);transform:scale(0);transition:transform .3s}
 .candle.lit::after{transform:scale(1);animation:flick .8s ease-in-out infinite alternate}
-@keyframes flick{to{transform:scale(1.12) rotate(5deg)}}
+.meter{width:min(300px,80%);height:8px;margin:14px auto 0;border-radius:999px;background:var(--lav);overflow:hidden}
+.meter span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--pink),var(--violet));transition:width .08s}
 
-.meter{width:min(300px,80%);height:8px;margin:16px auto 0;border-radius:999px;background:var(--lav);overflow:hidden}
-.meter span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--pink),var(--purple));transition:width .08s}
+/* 9. envelope + letter (layers: back 1 · letter 2→6 · pocket 3 · flap 4→1 · seal 7) */
+.stage{position:relative;width:min(320px,86vw);height:430px;margin:10px auto 0;clip-path:inset(-210px -24px 0 -24px);perspective:1100px}
+.env{position:absolute;left:0;right:0;bottom:0;height:190px;border:0;background:none;padding:0;cursor:pointer;display:block;perspective:800px}
+.eback,.pocket{position:absolute;inset:0;display:block;border-radius:8px}
+.eback{z-index:1;background:repeating-linear-gradient(35deg,rgba(255,255,255,.04) 0 2px,transparent 2px 5px),linear-gradient(160deg,#4A1468,#2A0B3B);
+  box-shadow:0 26px 38px rgba(0,0,0,.55),0 0 0 1px rgba(216,180,106,.4)}
+.pocket{z-index:3;background:linear-gradient(150deg,#8049B0,var(--royal) 55%,#3B0E56);border:1px solid rgba(216,180,106,.45);clip-path:inset(0 round 8px);filter:drop-shadow(0 -3px 4px rgba(0,0,0,.25))}
+.flap{position:absolute;z-index:4;left:0;right:0;top:0;height:94px;transform-origin:top center;transform-style:preserve-3d;
+  transition:transform 1.15s cubic-bezier(.22,.72,.18,1),z-index 0s .58s}
+.fo,.fi{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:8px 8px 0 0}
+.fo{background:linear-gradient(160deg,#9456C2,var(--royal));border:1px solid rgba(216,180,106,.8);border-bottom:0}
+.fi{transform:rotateX(180deg);background:linear-gradient(180deg,#C94C86,var(--blush));border:1px solid rgba(216,180,106,.65);border-bottom:0}
+.env.open .flap{transform:rotateX(178deg);z-index:1}
+.ribbon{position:absolute;z-index:5;left:50%;top:0;bottom:0;width:14px;margin-left:-7px;pointer-events:none;
+  background:linear-gradient(90deg,#C94C86,var(--pink),#C94C86);opacity:.92;clip-path:polygon(0 56%,100% 56%,100% 100%,0 100%);transition:opacity .6s}
+.env.open .ribbon{opacity:0}
+.seal{position:absolute;z-index:7;left:50%;top:44%;translate:-50% -50%;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#F28AB9,var(--pink) 45%,#8E2058);color:var(--gold);font-size:1.5rem;
+  box-shadow:0 5px 12px rgba(0,0,0,.5),inset 0 0 0 4px rgba(142,32,88,.55),inset 0 2px 3px rgba(255,255,255,.35);transition:opacity .4s,scale .4s}
+.env.open .seal{opacity:0;scale:.4}
+.letter{position:absolute;z-index:2;left:5%;width:90%;top:265px;height:310px;padding:22px 16px 18px;text-align:center;
+  border-radius:6px 6px 14px 14px / 6px 6px 22px 12px;color:#3A2347;
+  background:
+    linear-gradient(180deg,transparent 31.5%,rgba(120,80,140,.16) 32%,rgba(255,255,255,.55) 32.6%,transparent 34%,transparent 65.5%,rgba(120,80,140,.16) 66%,rgba(255,255,255,.55) 66.6%,transparent 68%),
+    repeating-linear-gradient(35deg,rgba(150,110,160,.05) 0 2px,transparent 2px 5px),
+    radial-gradient(ellipse at 30% 10%,#FFFFFF,#FBF1F6 55%,#F2E3EC);
+  box-shadow:0 8px 22px rgba(0,0,0,.4),inset 0 0 26px rgba(216,180,106,.2);
+  transition:transform 1.55s cubic-bezier(.2,.72,.15,1),box-shadow 1.55s,opacity .35s;transform-origin:50% 100%;will-change:transform}
+.letter::after{content:'';position:absolute;right:0;bottom:0;width:46px;height:46px;border-radius:0 0 14px 0;
+  background:linear-gradient(135deg,transparent 50%,rgba(120,80,140,.2) 51%,#F7E9F1 70%);box-shadow:-3px -3px 6px rgba(0,0,0,.12)}
+.letter p{font-size:clamp(1.05rem,4.4vw,1.3rem);line-height:2.05;direction:rtl}
+.letter.rise{transform:translateY(-225px) rotate(0deg);box-shadow:0 24px 38px rgba(0,0,0,.32),inset 0 0 26px rgba(216,180,106,.2)}
+.letter.front{z-index:6}
+.letter .icons{margin:0 0 4px}
+.stage:not(.opened) .letter{visibility:hidden}
 
-/* ===== Page 6: envelope ===== */
-.env{position:relative;display:block;width:min(280px,80vw);height:180px;margin:20px auto;border:0;border-radius:10px;
-  background:var(--silver);box-shadow:0 14px 30px rgba(96,68,118,.25);transition:scale .25s}
-.env:hover{scale:1.03}
-.env::before{content:'';position:absolute;inset:0;border-radius:10px;background:var(--lav);
-  clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}
-.flap{position:absolute;top:0;left:0;right:0;height:102px;background:var(--pink);
-  clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .8s}
-.env.open .flap{transform:rotateX(180deg)}
-.seal{position:absolute;left:50%;top:48%;translate:-50% -50%;color:var(--rose);font-size:1.6rem;z-index:3;transition:opacity .3s}
-.env.open .seal{opacity:0}
-.letter{margin-top:16px;padding:26px 20px;border:1px solid var(--silver);border-radius:24px;
-  background:var(--white);color:var(--text);font-size:1.3rem;line-height:2;animation:fadeIn .9s ease both}
+/* 10. finale */
+#finale{overflow:hidden;background:radial-gradient(ellipse at 50% 32%,rgba(231,84,154,.38),transparent 62%)}
+.fin-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.fin{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;padding-top:54px}
+.birthday-only{min-height:70svh;justify-content:center;padding:0 12px}
+.birthday-only .hb{margin:0;filter:drop-shadow(0 8px 24px rgba(0,0,0,.28))}
+.birthday-only .hb .row{direction:ltr;unicode-bidi:isolate;display:flex;flex-direction:row;font-family:var(--hand);font-weight:700;font-size:clamp(3.5rem,14vw,8rem);line-height:1.02;letter-spacing:.015em;white-space:nowrap;justify-content:center;width:100%;max-width:100%;text-align:center;text-shadow:0 3px 0 rgba(50,16,71,.12)}
+.birthday-only .hb b{animation:finalGlow 2.8s ease-in-out infinite alternate;filter:drop-shadow(0 3px 10px rgba(216,180,106,.35))}
+.birthday-only .hb .row + .row{margin-top:8px}
+@media(max-width:380px){.birthday-only .hb .row{font-size:clamp(3rem,12vw,4.3rem);letter-spacing:0}}
+.birthday-only .hb .row:first-child{transform:rotate(-3deg)}
+.birthday-only .hb .row:last-child{transform:rotate(2deg)}
+@keyframes finalGlow{from{opacity:.88;transform:translateY(0)}to{opacity:1;transform:translateY(-4px)}}
+.crown{font-size:clamp(2.4rem,9vw,4rem);color:var(--gold);filter:drop-shadow(0 0 14px rgba(216,180,106,.85));animation:floatY 3s ease-in-out infinite alternate}
+@keyframes floatY{to{transform:translateY(-10px)}}
+.hb{display:flex;flex-direction:column;align-items:center;line-height:1;margin:4px 0 14px}
+.hb .row{display:flex;direction:ltr;unicode-bidi:isolate;flex-direction:row;justify-content:center;font-family:var(--latin);font-weight:700;font-size:clamp(2.7rem,15vw,7rem)}
+.hb .arabic{font-family:var(--serif);font-size:clamp(2.3rem,10vw,5rem);direction:rtl;white-space:nowrap}
+.hb .name{font-size:clamp(3.2rem,19vw,9rem)}
+.hb b{display:inline-block;font-weight:700;background:linear-gradient(180deg,#FFF6D2,var(--gold) 55%,#A9792B);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:wave 1.8s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(231,84,154,.6))}
+.hb .name b{background:linear-gradient(180deg,#fff,var(--blush) 45%,var(--pink));-webkit-background-clip:text;background-clip:text}
+@keyframes wave{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.07)}}
+.wish{color:var(--pearl);font-size:clamp(1.15rem,4vw,1.6rem);max-width:640px;margin-top:4px;text-shadow:0 2px 10px rgba(0,0,0,.45)}
+.fin .icons{margin:12px 0 0}
+.bunting{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-around}
+.bunting::before{content:'';position:absolute;top:5px;left:0;right:0;height:2px;background:var(--gold)}
+.bunting i{width:34px;height:42px;margin-top:6px;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;animation:sway 2.4s ease-in-out infinite alternate}
+@keyframes sway{to{transform:rotate(7deg)}}
+.lights{position:absolute;top:58px;left:0;right:0;display:flex;justify-content:space-around}
+.lights i{width:11px;height:11px;border-radius:50%;background:currentColor;box-shadow:0 0 12px 3px currentColor;animation:twinkle 1.3s ease-in-out infinite alternate}
+.lights i:nth-child(even){margin-top:12px}
+@keyframes twinkle{from{opacity:.3}to{opacity:1}}
+.spark{position:absolute;color:var(--gold);animation:twinkle 1.6s ease-in-out infinite alternate;text-shadow:0 0 8px currentColor}
+.fb{position:absolute;bottom:-90px;width:var(--s);height:calc(var(--s)*1.22);border-radius:50% 50% 48% 48%/58% 58% 42% 42%;background:var(--c);opacity:.9;
+  box-shadow:inset -6px -8px 12px rgba(50,16,71,.25),inset 5px 6px 9px rgba(255,255,255,.35);animation:rise var(--d) linear var(--dl) infinite}
+.fb::after{content:'';position:absolute;left:50%;top:100%;width:1px;height:40px;background:rgba(255,255,255,.5)}
+@keyframes rise{0%{transform:translate(0,0)}25%{transform:translate(14px,-30vh)}50%{transform:translate(-14px,-65vh)}75%{transform:translate(12px,-95vh)}100%{transform:translate(0,-125vh)}}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+.confetti i{position:absolute;top:-16px;width:9px;height:14px;opacity:.9;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  html{scroll-behavior:auto}
+  .confetti,#floaters{display:none}
 }
 </style>
 </head>
 <body>
-<div class="bg" aria-hidden="true"><span>❀</span><span>❀</span><span>❀</span><span>❀</span></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="sakura" viewBox="0 0 40 40"><g fill="#F8C8DC" stroke="#E7549A" stroke-width=".8">
+    <ellipse cx="20" cy="9" rx="6" ry="9"/><ellipse cx="20" cy="9" rx="6" ry="9" transform="rotate(72 20 20)"/><ellipse cx="20" cy="9" rx="6" ry="9" transform="rotate(144 20 20)"/>
+    <ellipse cx="20" cy="9" rx="6" ry="9" transform="rotate(216 20 20)"/><ellipse cx="20" cy="9" rx="6" ry="9" transform="rotate(288 20 20)"/></g><circle cx="20" cy="20" r="3" fill="#D8B46A"/></symbol>
+  <symbol id="flame" viewBox="0 0 60 44"><path d="M30 2C35 13 54 17 52 30C50 41 38 44 30 41C17 45 5 36 8 25C10 18 18 13 19 5C25 12 26 18 25 22C30 16 31 10 30 2Z" fill="#D9432F"/><path d="M30 39C23 38 20 32 24 26C27 22 30 19 31 14C38 22 44 28 39 35C37 38 34 40 30 39Z" fill="#FFD27A"/><path d="M30 42V4" stroke="#FFF1D6" stroke-width="1.5" opacity=".65"/></symbol>
+  <symbol id="hat" viewBox="0 0 60 44"><ellipse cx="30" cy="32" rx="28" ry="8" fill="#D98A32" stroke="#8D4D1D" stroke-width="1.5"/><path d="M14 30C14 12 22 5 30 5S46 12 46 30Z" fill="#E8B66C" stroke="#8D4D1D" stroke-width="1.5"/><path d="M14 24H46V29H14Z" fill="#C92F43"/><path d="M20 10Q30 4 40 10" fill="none" stroke="#FFF0C8" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="chopper" viewBox="0 0 60 44"><path d="M17 15L9 5L7 15M43 15L51 5L53 15" fill="#D9A78C" stroke="#704A39" stroke-width="2.5" stroke-linejoin="round"/><path d="M15 14Q30 3 45 14L42 29H18Z" fill="#E7A1C5" stroke="#7B3B70" stroke-width="1.5"/><rect x="12" y="22" width="36" height="8" rx="3" fill="#C83E7B"/><path d="M22 17L30 23L38 17" fill="none" stroke="#FFF5FA" stroke-width="2.5"/><circle cx="30" cy="34" r="5" fill="#D8B46A" stroke="#704A39" stroke-width="1.5"/><path d="M26 34H34M30 30V38" stroke="#704A39" stroke-width="1.3"/></symbol>
+  <symbol id="checker" viewBox="0 0 60 44"><rect width="60" height="44" rx="6" fill="#176C45"/><g fill="#17251F"><rect width="15" height="14.7"/><rect x="30" width="15" height="14.7"/><rect x="15" y="14.7" width="15" height="14.7"/><rect x="45" y="14.7" width="15" height="14.7"/><rect y="29.3" width="15" height="14.7"/><rect x="30" y="29.3" width="15" height="14.7"/></g><path d="M4 4L56 40M0 22L23 44" stroke="#9BD19B" stroke-width="1.4" opacity=".65"/></symbol>
+  <symbol id="muzzle" viewBox="0 0 60 30"><path d="M12 7Q30 0 48 7L44 23Q30 30 16 23Z" fill="#77A56A" stroke="#355B3A" stroke-width="1.5"/><path d="M20 6V25M30 4V27M40 6V25" stroke="#355B3A" stroke-width="2"/><path d="M12 15H3M48 15H57" stroke="#E7549A" stroke-width="4" stroke-linecap="round"/><circle cx="30" cy="15" r="3" fill="#F8C8DC"/></symbol>
+</defs></svg>
 
 <main>
   <!-- 1. Yes / No -->
   <section class="page active" id="gate">
-    <p class="small">مفاجأة خاصة لحنان</p>
-    <h1>مستعدة للمفاجأة؟</h1>
-    <p class="sub">اختاري إجابتكِ 🌸</p>
-    <div class="arena" id="arena">
-      <button class="flower" id="noBtn" type="button" data-label="لا"></button>
-      <button class="flower" id="yesBtn" type="button" data-label="نعم"></button>
+    <div class="card">
+      <div class="icons" aria-hidden="true"><svg class="ic"><use href="#sakura"/></svg><div class="crest"><span>♛</span></div><svg class="ic"><use href="#sakura"/></svg></div>
+      <h1>مستعدة للمفاجأة؟</h1>
+      <div class="arena" id="arena">
+        <button class="flower" id="noBtn" type="button" data-label="لا"></button>
+        <button class="flower" id="yesBtn" type="button" data-label="نعم"></button>
+      </div>
     </div>
-    <p class="hint" id="gateHint" aria-live="polite"></p>
   </section>
 
-  <!-- 2. Royal door -->
+  <!-- 2. Door -->
   <section class="page" id="door">
-    <div class="orn" aria-hidden="true">❀ ✦ ❀</div>
-    <h2>البابُ الملكي</h2>
-    <p class="sub">المفاجأة خلف هذا الباب… وسيُفتح لكِ بعد لحظات ✨</p>
-    <button class="scene" id="scene" type="button" tabindex="-1" disabled aria-label="الباب الملكي يُفتح تلقائياً">
-      <span class="arch"></span><span class="leaf l"></span><span class="leaf r"></span>
-    </button>
+    <div class="card">
+      <div class="orn" aria-hidden="true">✦ ♛ ✦</div>
+      <div class="door-row" aria-hidden="true">
+        <svg class="ic torch"><use href="#flame"/></svg>
+        <button class="scene" id="scene" type="button" tabindex="-1" disabled aria-label="الباب الملكي يُفتح تلقائياً"><span class="arch"></span><span class="leaf l"></span><span class="leaf r"></span></button>
+        <svg class="ic torch"><use href="#flame"/></svg>
+      </div>
+    </div>
   </section>
 
   <!-- 3. Balloons -->
   <section class="page" id="balloons">
-    <h2>أربع رسائل لكِ 🎈</h2>
-    <p class="sub">انقري على كل بالون لتكتشفي ما فيه</p>
-    <div class="grid" id="balloonGrid">
-      <div class="cell"><button class="balloon" type="button" data-msg="بوجودكِ تصبح الأيام أجمل وأهدأ 🌸">انقري</button></div>
-      <div class="cell"><button class="balloon" type="button" data-msg="أينما حضرتِ حضر معكِ الدفء والبهجة ✨">انقري</button></div>
-      <div class="cell"><button class="balloon" type="button" data-msg="قلبكِ نقي، وروحكِ من أجمل ما عرفت 💖">انقري</button></div>
-      <div class="cell"><button class="balloon" type="button" data-msg="عامٌ جديد يليق برقّتكِ وجمال روحكِ 🌷">انقري</button></div>
-    </div>
-    <button class="btn" data-go="letters" id="toLetters" hidden>تابعي 🌸</button>
+    <div id="balloonGrid"></div>
   </section>
 
-  <!-- 4. HANANE letters -->
+  <!-- 5. HANANE -->
   <section class="page" id="letters">
     <div class="card">
-      <div class="orn" aria-hidden="true">❀ ✦ ❀</div>
-      <h2>لأنكِ استثنائية 💖</h2>
-      <p class="sub">اضغطي على كل حرف من اسمكِ لتقرئي همسته</p>
-      <div class="letters" dir="ltr" id="letterRow"></div>
-      <div class="lettermsg" id="letterMsg" aria-live="polite">اختاري حرفاً ✨</div>
-      <button class="btn" data-go="cake" id="toCake" hidden>إلى الكعكة 🎂</button>
+      <div class="orn" aria-hidden="true">✦ ♛ ✦</div>
+      <div class="letters" dir="ltr" id="letterRow"></div><div class="lettermsg" id="letterMsg" aria-live="polite"></div>
     </div>
   </section>
 
-  <!-- 5. Cake -->
+  <!-- 8. Cake -->
   <section class="page" id="cake">
     <div class="card">
-      <h2>كعكتكِ الملكية 🎂</h2>
-      <p class="sub">أضيئي الشموع، ثم أطفئيها وتمنّي أمنية</p>
+      <div class="icons" aria-hidden="true"><svg class="ic sm"><use href="#sakura"/></svg><svg class="ic sm"><use href="#sakura"/></svg></div>
       <div class="cake" aria-hidden="true">
-        <div class="t1"><div class="candles" id="candles">
-          <span class="candle"></span><span class="candle"></span><span class="candle"></span><span class="candle"></span><span class="candle"></span>
-        </div></div>
+        <div class="t1"><div class="candles"><span class="candle"></span><span class="candle"></span><span class="candle"></span><span class="candle"></span><span class="candle"></span></div></div>
         <div class="t2"></div><div class="plate"></div>
       </div>
       <div class="row">
-        <button class="btn" id="lightBtn" type="button">🕯️ أضيئي الشموع</button>
-        <button class="btn alt" id="micBtn" type="button" disabled>🎙️ انفخي في المايكروفون</button>
-        <button class="btn alt" id="blowBtn" type="button" disabled>💨 أطفئي بالزر</button>
+        <button class="btn flame" id="lightBtn" type="button">🕯️ أضيئي الشموع</button>
+        <button class="btn bamboo" id="micBtn" type="button" disabled>🎙️ انفخي في المايكروفون</button>
+        <button class="btn ghost" id="blowBtn" type="button" disabled>💨 أطفئي بالزر</button>
       </div>
       <div class="meter" aria-hidden="true"><span id="meter"></span></div>
-      <p class="hint" id="cakeStatus" aria-live="polite"></p>
-      <button class="btn" data-go="envelope" id="toEnvelope" hidden>الرسالة 💌</button>
     </div>
   </section>
 
-  <!-- 6. Envelope -->
+  <!-- 9. Envelope -->
   <section class="page" id="envelope">
     <div class="card">
       <h2>رسالة من القلب 💌</h2>
-      <button class="env" id="env" type="button" aria-label="افتحي الظرف">
-        <span class="flap"></span><span class="seal" aria-hidden="true">❀</span>
-      </button>
-      <p class="hint" id="envHint">اضغطي على الظرف لفتحه ✨</p>
-      <div class="letter" id="letter" hidden>
-        كل عام وأنتِ بخير يا حنان.<br>
-        عيد ميلاد سعيد من صميم القلب،<br>
-        وعسى أن تزهر أيامكِ بالفرح والتوفيق والسلام. 🎂
+      <div class="stage">
+        <article class="letter" id="letter" aria-live="polite">
+          <div class="icons" aria-hidden="true"><svg class="ic sm"><use href="#sakura"/></svg><svg class="ic sm"><use href="#sakura"/></svg></div>
+          <p>إلى الغالية حنان،<br>كل عام وأنتِ بخير وسعادة.<br>عيد ميلاد سعيد من صميم القلب،<br>وعسى أن تزهر أيامكِ بالفرح والتوفيق والسلام،<br>وأن تبقى ابتسامتكِ نوراً لكل من حولكِ. 🎂</p>
+        </article>
+        <button class="env" id="env" type="button" aria-label="افتحي الظرف">
+          <span class="eback"></span><span class="pocket"></span><span class="flap"><span class="fo"></span><span class="fi"></span></span><span class="ribbon"></span><span class="seal" aria-hidden="true">♛</span>
+        </button>
       </div>
     </div>
+  </section>
+
+  <!-- 10. Finale -->
+  <section class="page" id="finale">
+    <div class="fin-bg" aria-hidden="true"><div id="sparks"></div><div id="floaters"></div><div class="bunting" id="bunting"></div><div class="lights" id="lights"></div></div>
+    <div class="fin birthday-only">
+      <h1 class="hb" aria-label="Happy Birthday"><span class="row" id="rowA" aria-hidden="true"></span><span class="row" id="rowB" aria-hidden="true"></span></h1>
+    </div>
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
   </section>
 </main>
 
@@ -235,188 +318,206 @@ h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:clamp(1.7rem,6vw,2.4rem)}
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const AUTO = 3000;                                      // delay after the last required interaction
+  const T = ms => reduce ? Math.min(ms, 600) : ms;       // shorter waits when reduced motion
 
-  /* ---- page navigation ---- */
+  /* ---------- stage navigation (one transition at a time, guarded) ---------- */
+  let cur = 'gate', nav = false;
+  const init = {};
   function go(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === id));
-    window.scrollTo(0, 0);
-    const h = $('#' + id + ' h1, #' + id + ' h2');
-    if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
+    if (nav || id === cur) return;
+    nav = true;
+    const from = $('#' + cur), to = $('#' + id);
+    from.classList.add('out');
+    setTimeout(() => {
+      from.classList.remove('active', 'out');
+      to.classList.add('active');
+      cur = id; nav = false;
+      scrollTo(0, 0);
+      const h = $('h1, h2', to); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
+      if (init[id]) init[id]();
+    }, reduce ? 0 : 600);
   }
-  document.addEventListener('click', e => {
-    const b = e.target.closest('[data-go]');
-    if (b) go(b.dataset.go);
+  let pendingNext = null;
+  const later = (from, to, ms) => {
+    if (pendingNext && pendingNext.timer) clearTimeout(pendingNext.timer);
+    const timer = setTimeout(() => { if (cur === from) go(to); if (pendingNext && pendingNext.from === from) pendingNext = null; }, T(ms));
+    pendingNext = { from, to, timer };
+  };
+  document.addEventListener('click', (event) => {
+    if (!pendingNext || pendingNext.from !== cur) return;
+    if (event.target.closest('button, a, input, textarea, select, label')) return;
+    const next = pendingNext; clearTimeout(next.timer); pendingNext = null; go(next.to);
   });
 
-  /* ---- build six-petal flowers ---- */
+  /* ---------- six-petal flowers ---------- */
   document.querySelectorAll('.flower').forEach(f => {
     for (let i = 0; i < 6; i++) {
-      const p = document.createElement('span');
-      p.className = 'petal';
-      p.style.transform = 'rotate(' + i * 60 + 'deg)';
-      f.appendChild(p);
+      const p = document.createElement('span'); p.className = 'petal';
+      p.style.transform = 'rotate(' + i * 60 + 'deg)'; f.appendChild(p);
     }
-    const c = document.createElement('span');
-    c.className = 'core';
-    c.textContent = f.dataset.label;
-    f.appendChild(c);
+    const c = document.createElement('span'); c.className = 'core'; c.textContent = f.dataset.label; f.appendChild(c);
   });
 
-  /* ---- Page 1: yes / no ---- */
-  const arena = $('#arena'), yes = $('#yesBtn'), no = $('#noBtn'), hint = $('#gateHint');
-  const pos = { yes: { x: .9, y: .5 }, no: { x: .1, y: .5 } };      // fractions of free space
-  // "yes" is clicked 3 times; each click draws one stroke of the letter H
-  const strokes = [
-    [{ x: .1, y: .04 }, { x: .1, y: .96 }],   // left vertical
-    [{ x: .1, y: .5 }, { x: .9, y: .5 }],     // crossbar
-    [{ x: .9, y: .04 }, { x: .9, y: .96 }]    // right vertical
-  ];
-  let clicks = 0, busy = false;
-
-  function place(el, p) {
-    el.style.left = p.x * (arena.clientWidth - el.offsetWidth) + 'px';
-    el.style.top = p.y * (arena.clientHeight - el.offsetHeight) + 'px';
+  /* ---------- 1. yes / no: one click ---------- */
+  const arena = $('#arena'), yes = $('#yesBtn'), no = $('#noBtn');
+  function placeCenter(el) {
+    el.style.left = ((arena.clientWidth - el.offsetWidth) / 2) + 'px';
+    el.style.top = ((arena.clientHeight - el.offsetHeight) / 2) + 'px';
   }
-  function layout() { place(yes, pos.yes); if (!no.hidden) place(no, pos.no); }
-  layout();
-  addEventListener('resize', layout);
-
-  const STEP = reduce ? 200 : 900; // time per waypoint
-  function onClick() {
-    if (busy || clicks >= 3) return;
-    busy = true;
-    no.hidden = true;                       // "لا" disappears for good
-    const path = strokes[clicks++];
-    hint.textContent = clicks < 3 ? 'اضغطي على «نعم» مرة أخرى ✨ (' + clicks + '/3)' : 'ما أجمل الحرف H! 💖 (3/3)';
-    let i = 0;
-    (function step() {
-      pos.yes = path[i]; place(yes, pos.yes); i++;
-      if (i < path.length) setTimeout(step, STEP);
-      else setTimeout(() => {
-        if (clicks === 3) enterDoor(); else busy = false;
-      }, STEP);
-    })();
+  function layout() {
+    yes.style.left = (arena.clientWidth * .68 - yes.offsetWidth / 2) + 'px';
+    yes.style.top = (arena.clientHeight - yes.offsetHeight) / 2 + 'px';
+    no.style.left = (arena.clientWidth * .24 - no.offsetWidth / 2) + 'px';
+    no.style.top = (arena.clientHeight - no.offsetHeight) / 2 + 'px';
   }
-  yes.addEventListener('click', onClick);
-  no.addEventListener('click', onClick);
-
-  /* ---- Page 2: door ---- */
-  const scene = $('#scene');
-  hint.textContent = 'اضغطي على «نعم» ثلاث مرات 🌸';
-  function enterDoor() {
-    go('door');
-    setTimeout(() => scene.classList.add('open'), reduce ? 100 : 900);        // opens by itself
-    setTimeout(() => go('balloons'), reduce ? 600 : 3300);                    // then continues
-  }
-
-  /* ---- Page 3: balloons ---- */
-  let popped = 0;
-  document.querySelectorAll('.balloon').forEach(b => {
-    b.addEventListener('click', () => {
-      const m = document.createElement('p');
-      m.className = 'msg'; m.textContent = b.dataset.msg;
-      b.replaceWith(m);
-      if (++popped === 4) $('#toLetters').hidden = false;
-    }, { once: true });
+  layout(); addEventListener('resize', layout);
+  yes.addEventListener('click', () => go('door'));
+  no.addEventListener('click', () => {
+    no.hidden = true;
+    yes.classList.add('yes-big');
+    placeCenter(yes);
   });
 
-  /* ---- Page 4: HANANE ---- */
-  const lines = {
-    H: 'حنان… اسمٌ يشبه صاحبته: دفءٌ وطمأنينة.',
-    A1: 'أختٌ تُحسن الإصغاء وتمنح الأمان بلا مقابل.',
-    N1: 'نقاء قلبكِ يظهر في أبسط التفاصيل.',
-    A2: 'ابتسامتكِ تُخفف أثقل الأيام.',
-    N2: 'نورٌ يسبقكِ أينما حللتِ.',
-    E: 'في كل عام تزدادين جمالاً وحكمة.'
+  /* ---------- 2. door opens by itself ---------- */
+  init.door = () => {
+    setTimeout(() => $('#scene').classList.add('open'), T(1000));
+    later('door', 'balloons', 4200);
   };
-  const keys = Object.keys(lines), seen = new Set();
-  const row = $('#letterRow'), out = $('#letterMsg');
-  'HANANE'.split('').forEach((ch, i) => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'badge'; b.textContent = ch;
-    b.setAttribute('aria-label', 'الحرف ' + ch);
+
+  /* ---------- 3. balloons: message replaces balloon in the same cell ---------- */
+  const poems = [   // original verses (not quotations), written for Hanane
+    'حَنانُ اسمٌ يُضيءُ الدارَ إنْ ذُكِرا<br>وبَسمةٌ تَزرعُ الأفراحَ والزُّهَرا',
+    'إذا حَضَرتِ أتى الإشراقُ مُبتَسِماً<br>وكانَ للروحِ في لُقياكِ ما انتَظَرا',
+    'قلبٌ كَصَفوِ النَّدى، روحٌ مُحَلِّقةٌ<br>تُهدي الأمانَ لِمَن في دَربِها عَبَرا',
+    'عامٌ جديدٌ يُحيّيكِ الزمانُ بهِ<br>ويَنثرُ الوردَ في دَربٍ لكِ انتَشَرا'
+  ];
+  const themes = [['hat', 'قبعة القش من ون بيس'], ['chopper', 'قبعة تشوبر من ون بيس'], ['checker', 'نقشة تانجيرو من قاتل الشياطين'], ['flame', 'لهب تنفس اللهب من قاتل الشياطين']];
+  const grid = $('#balloonGrid'); let popped = 0;
+  poems.forEach((m, i) => {
+    const cell = document.createElement('div'); cell.className = 'cell';
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'balloon';
+    b.setAttribute('aria-label', 'بالون مستوحى من ' + themes[i][1]);
+    b.innerHTML = '<svg aria-hidden="true"><use href="#' + themes[i][0] + '"/></svg>';
     b.addEventListener('click', () => {
-      out.textContent = lines[keys[i]];
-      b.classList.add('done'); seen.add(i);
-      if (seen.size === 6) $('#toCake').hidden = false;
+      const p = document.createElement('div'); p.className = 'msg';
+      p.innerHTML = '<div><div class="verse">' + m + '</div></div>';
+      cell.replaceChildren(p);                               // same cell → same position
+      if (++popped === poems.length) later('balloons', 'letters', AUTO);
+    }, { once: true });
+    cell.appendChild(b); grid.appendChild(cell);
+  });
+
+  /* ---------- 5. HANANE letters ---------- */
+  const lines = [
+    'حياةٌ مليئة بالفرح يا حنان 💖',
+    'أمنياتكِ كلها تصير حقيقة ✨',
+    'نورٌ ونجاحٌ في كل خطوة 🌷',
+    'ابتسامتكِ لا تفارقكِ أبداً 😊',
+    'راحةٌ وسعادةٌ في كل يوم 👑',
+    'عامٌ جديدٌ أجمل من كل ما مضى 🎂'
+  ];
+  const seen = new Set(), row = $('#letterRow'), out = $('#letterMsg');
+  'HANANE'.split('').forEach((ch, i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'badge'; b.textContent = ch;
+    b.setAttribute('aria-label', 'الحرف ' + ch);
+    if (i === 1) b.dataset.k = 'a'; if (i === 2) b.dataset.k = 'n';
+    b.addEventListener('click', () => {
+      out.textContent = lines[i]; b.classList.add('done');
+      if (!seen.has(i) && seen.add(i).size === 6) later('letters', 'cake', AUTO);
     });
     row.appendChild(b);
   });
 
-  /* ---- Page 5: cake (no microphone) ---- */
+  /* ---------- 8. cake (optional microphone, button fallback) ---------- */
   const candles = document.querySelectorAll('.candle');
   const lightBtn = $('#lightBtn'), blowBtn = $('#blowBtn'), micBtn = $('#micBtn');
-  const cs = $('#cakeStatus'), meter = $('#meter');
+  const meter = $('#meter');
   let stream = null, ctx = null, raf = null, blown = false;
-
   function stopMic() {
-    if (raf) cancelAnimationFrame(raf);
-    raf = null;
+    if (raf) cancelAnimationFrame(raf); raf = null;
     if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
     if (ctx) { ctx.close().catch(() => {}); ctx = null; }
   }
   function blowOut() {
-    if (blown) return;
-    blown = true;
-    stopMic();
+    if (blown) return; blown = true; stopMic();
     candles.forEach(c => c.classList.remove('lit'));
-    blowBtn.disabled = true; micBtn.disabled = true;
-    meter.style.width = '100%';
-    cs.textContent = 'عسى أن تتحقق أمنيتكِ يا حنان 🎂💖';
-    $('#toEnvelope').hidden = false;
+    blowBtn.disabled = true; micBtn.disabled = true; meter.style.width = '100%';
+    later('cake', 'envelope', AUTO);
   }
   lightBtn.addEventListener('click', () => {
     candles.forEach(c => c.classList.add('lit'));
     lightBtn.disabled = true; blowBtn.disabled = false; micBtn.disabled = false;
-    cs.textContent = 'الشموع مضيئة ✨ انفخي في المايكروفون أو استخدمي الزر';
   });
   blowBtn.addEventListener('click', blowOut);
-
   micBtn.addEventListener('click', async () => {
     if (blown || stream) return;
     try {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('unsupported');
-      stream = await navigator.mediaDevices.getUserMedia({
-        audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false }
-      });
-      const AC = window.AudioContext || window.webkitAudioContext;
-      ctx = new AC();
+      stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+      const AC = window.AudioContext || window.webkitAudioContext; ctx = new AC();
       if (ctx.state === 'suspended') await ctx.resume();
-      const an = ctx.createAnalyser();
-      an.fftSize = 1024;
+      const an = ctx.createAnalyser(); an.fftSize = 1024;
       ctx.createMediaStreamSource(stream).connect(an);
-      const buf = new Uint8Array(an.fftSize);
-      let since = 0;
+      const buf = new Uint8Array(an.fftSize); let since = 0;
       micBtn.disabled = true;
-      cs.textContent = '🎙️ المايكروفون يستمع… انفخي الآن برفق نحو الشاشة';
       (function listen() {
         an.getByteTimeDomainData(buf);
-        let sum = 0;
-        for (let i = 0; i < buf.length; i++) { const v = (buf[i] - 128) / 128; sum += v * v; }
+        let sum = 0; for (let i = 0; i < buf.length; i++) { const v = (buf[i] - 128) / 128; sum += v * v; }
         const rms = Math.sqrt(sum / buf.length);
         meter.style.width = Math.min(100, rms / 0.25 * 100) + '%';
-        if (rms > 0.1) {
-          since = since || performance.now();
-          if (performance.now() - since > 150) { blowOut(); return; }
-        } else { since = 0; }
+        if (rms > 0.1) { since = since || performance.now(); if (performance.now() - since > 150) { blowOut(); return; } } else since = 0;
         raf = requestAnimationFrame(listen);
       })();
     } catch (err) {
-      stopMic();
-      micBtn.disabled = false;
-      cs.textContent = 'تعذّر تشغيل المايكروفون. يمكنكِ استخدام زر «أطفئي بالزر» 💨';
+      stopMic(); micBtn.disabled = false;
+      micBtn.textContent = '🎙️ حاولي تشغيل المايكروفون مجدداً';
     }
   });
 
-  /* ---- Page 6: envelope ---- */
-  const env = $('#env');
+  /* ---------- 9. envelope: flap opens → letter slides out → comes in front ---------- */
+  const env = $('#env'), letter = $('#letter');
   env.addEventListener('click', () => {
     if (env.classList.contains('open')) return;
-    env.classList.add('open');
-    env.disabled = true;
-    $('#envHint').textContent = '';
-    setTimeout(() => { $('#letter').hidden = false; }, reduce ? 0 : 500);
+    env.classList.add('open'); $('.stage').classList.add('opened'); env.disabled = true; 
+    setTimeout(() => letter.classList.add('rise'), T(850));
+    setTimeout(() => letter.classList.add('front'), T(2300));
+    later('envelope', 'finale', 2600 + AUTO);
   });
+
+  /* ---------- 10. finale: built once when the stage appears ---------- */
+  let finaleBuilt = false;
+  init.finale = () => {
+    if (finaleBuilt) return; finaleBuilt = true;
+    const cols = ['#E7549A', '#D8B46A', '#7138A0', '#F8C8DC', '#DCC6F4', '#E7E2EE'];
+    let n = 0;
+    [['HAPPY', 'rowA'], ['BIRTHDAY', 'rowB']].forEach(([w, id]) => {
+      [...w].forEach(ch => { const b = document.createElement('b'); b.textContent = ch === ' ' ? '\u00a0' : ch; b.style.animationDelay = (n++ * 0.055) + 's'; $('#' + id).appendChild(b); });
+    });
+    const count = Math.min(30, Math.ceil(innerWidth / 52));
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('i'); p.style.background = cols[i % cols.length]; p.style.animationDelay = (i % 5) * -0.4 + 's'; $('#bunting').appendChild(p);
+      const l = document.createElement('i'); l.style.color = cols[(i + 2) % cols.length]; l.style.animationDelay = (i % 7) * -0.2 + 's'; $('#lights').appendChild(l);
+    }
+    for (let i = 0; i < 34; i++) {
+      const sp = document.createElement('span'); sp.className = 'spark'; sp.textContent = '✦';
+      sp.style.left = Math.random() * 100 + '%'; sp.style.top = 14 + Math.random() * 82 + '%';
+      sp.style.fontSize = 8 + Math.random() * 16 + 'px'; sp.style.animationDelay = Math.random() * 2 + 's'; $('#sparks').appendChild(sp);
+    }
+    if (reduce) return;
+    const fills = ['linear-gradient(160deg,#F7A8C9,#E7549A)', 'linear-gradient(160deg,#A57BD0,#7138A0)', 'linear-gradient(160deg,#F6D68A,#D8B46A)', 'linear-gradient(160deg,#DCC6F4,#A98AD6)'];
+    for (let i = 0; i < 10; i++) {
+      const f = document.createElement('span'); f.className = 'fb';
+      f.style.cssText = 'left:' + (4 + i * 9.5) + '%;--s:' + (46 + Math.random() * 28) + 'px;--c:' + fills[i % 4] + ';--d:' + (10 + Math.random() * 8) + 's;--dl:' + (-Math.random() * 12) + 's';
+      $('#floaters').appendChild(f);
+    }
+    for (let i = 0; i < 70; i++) {
+      const c = document.createElement('i');
+      c.style.left = Math.random() * 100 + '%'; c.style.background = cols[i % cols.length];
+      c.style.animationDuration = 3 + Math.random() * 3 + 's'; c.style.animationDelay = -Math.random() * 5 + 's';
+      $('#confetti').appendChild(c);
+    }
+  };
 })();
 </script>
 </body>
