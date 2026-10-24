@@ -52,7 +52,7 @@ h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:clamp(1.7rem,6vw,2.4rem)}
 .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 
 /* ===== Page 1: flower buttons ===== */
-.arena{position:relative;width:min(420px,100%);height:270px;margin:12px auto 0}
+.arena{position:relative;width:min(420px,100%);height:320px;margin:12px auto 0}
 .flower{position:absolute;width:104px;height:104px;border:0;background:none;padding:0;
   transition:left .8s cubic-bezier(.5,0,.2,1),top .8s cubic-bezier(.5,0,.2,1),scale .25s}
 .flower:hover{scale:1.06}
@@ -117,6 +117,9 @@ h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:clamp(1.7rem,6vw,2.4rem)}
 .candle.lit::after{transform:scale(1);animation:flick .8s ease-in-out infinite alternate}
 @keyframes flick{to{transform:scale(1.12) rotate(5deg)}}
 
+.meter{width:min(300px,80%);height:8px;margin:16px auto 0;border-radius:999px;background:var(--lav);overflow:hidden}
+.meter span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--pink),var(--purple));transition:width .08s}
+
 /* ===== Page 6: envelope ===== */
 .env{position:relative;display:block;width:min(280px,80vw);height:180px;margin:20px auto;border:0;border-radius:10px;
   background:var(--silver);box-shadow:0 14px 30px rgba(96,68,118,.25);transition:scale .25s}
@@ -157,8 +160,8 @@ h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:clamp(1.7rem,6vw,2.4rem)}
   <section class="page" id="door">
     <div class="orn" aria-hidden="true">❀ ✦ ❀</div>
     <h2>البابُ الملكي</h2>
-    <p class="sub">المفاجأة خلف هذا الباب. المسي الباب لتفتحيه</p>
-    <button class="scene" id="scene" type="button" aria-label="افتحي الباب الملكي">
+    <p class="sub">المفاجأة خلف هذا الباب… وسيُفتح لكِ بعد لحظات ✨</p>
+    <button class="scene" id="scene" type="button" tabindex="-1" disabled aria-label="الباب الملكي يُفتح تلقائياً">
       <span class="arch"></span><span class="leaf l"></span><span class="leaf r"></span>
     </button>
   </section>
@@ -201,8 +204,10 @@ h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:clamp(1.7rem,6vw,2.4rem)}
       </div>
       <div class="row">
         <button class="btn" id="lightBtn" type="button">🕯️ أضيئي الشموع</button>
-        <button class="btn alt" id="blowBtn" type="button" disabled>💨 أطفئي الشموع</button>
+        <button class="btn alt" id="micBtn" type="button" disabled>🎙️ انفخي في المايكروفون</button>
+        <button class="btn alt" id="blowBtn" type="button" disabled>💨 أطفئي بالزر</button>
       </div>
+      <div class="meter" aria-hidden="true"><span id="meter"></span></div>
       <p class="hint" id="cakeStatus" aria-live="polite"></p>
       <button class="btn" data-go="envelope" id="toEnvelope" hidden>الرسالة 💌</button>
     </div>
@@ -260,8 +265,13 @@ h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:clamp(1.7rem,6vw,2.4rem)}
   /* ---- Page 1: yes / no ---- */
   const arena = $('#arena'), yes = $('#yesBtn'), no = $('#noBtn'), hint = $('#gateHint');
   const pos = { yes: { x: .9, y: .5 }, no: { x: .1, y: .5 } };      // fractions of free space
-  const moves = [{ x: .12, y: .08 }, { x: .88, y: .92 }, { x: .5, y: .5 }]; // 3 movements
-  let state = 'idle'; // idle -> moving -> ready -> done
+  // "yes" is clicked 3 times; each click draws one stroke of the letter H
+  const strokes = [
+    [{ x: .1, y: .04 }, { x: .1, y: .96 }],   // left vertical
+    [{ x: .1, y: .5 }, { x: .9, y: .5 }],     // crossbar
+    [{ x: .9, y: .04 }, { x: .9, y: .96 }]    // right vertical
+  ];
+  let clicks = 0, busy = false;
 
   function place(el, p) {
     el.style.left = p.x * (arena.clientWidth - el.offsetWidth) + 'px';
@@ -271,32 +281,33 @@ h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:clamp(1.7rem,6vw,2.4rem)}
   layout();
   addEventListener('resize', layout);
 
-  function start() {
-    if (state !== 'idle') return;
-    state = 'moving';
+  const STEP = reduce ? 200 : 900; // time per waypoint
+  function onClick() {
+    if (busy || clicks >= 3) return;
+    busy = true;
     no.hidden = true;                       // "لا" disappears for good
-    hint.textContent = 'انتبهي… الزهرة تتحرك ✨';
+    const path = strokes[clicks++];
+    hint.textContent = clicks < 3 ? 'اضغطي على «نعم» مرة أخرى ✨ (' + clicks + '/3)' : 'ما أجمل الحرف H! 💖 (3/3)';
     let i = 0;
     (function step() {
-      pos.yes = moves[i]; place(yes, pos.yes); i++;
-      if (i < moves.length) setTimeout(step, reduce ? 400 : 1500);
-      else setTimeout(() => { state = 'ready'; hint.textContent = 'اضغطي على «نعم» لفتح الباب 🌸'; }, reduce ? 100 : 900);
+      pos.yes = path[i]; place(yes, pos.yes); i++;
+      if (i < path.length) setTimeout(step, STEP);
+      else setTimeout(() => {
+        if (clicks === 3) enterDoor(); else busy = false;
+      }, STEP);
     })();
   }
-  yes.addEventListener('click', () => {
-    if (state === 'idle') start();
-    else if (state === 'ready') { state = 'done'; go('door'); }
-  });
-  no.addEventListener('click', () => { if (state === 'idle') start(); });
+  yes.addEventListener('click', onClick);
+  no.addEventListener('click', onClick);
 
   /* ---- Page 2: door ---- */
   const scene = $('#scene');
-  scene.addEventListener('click', () => {
-    if (scene.classList.contains('open')) return;
-    scene.classList.add('open');
-    scene.disabled = true;
-    setTimeout(() => go('balloons'), reduce ? 300 : 1900);
-  });
+  hint.textContent = 'اضغطي على «نعم» ثلاث مرات 🌸';
+  function enterDoor() {
+    go('door');
+    setTimeout(() => scene.classList.add('open'), reduce ? 100 : 900);        // opens by itself
+    setTimeout(() => go('balloons'), reduce ? 600 : 3300);                    // then continues
+  }
 
   /* ---- Page 3: balloons ---- */
   let popped = 0;
@@ -334,17 +345,67 @@ h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:clamp(1.7rem,6vw,2.4rem)}
 
   /* ---- Page 5: cake (no microphone) ---- */
   const candles = document.querySelectorAll('.candle');
-  const lightBtn = $('#lightBtn'), blowBtn = $('#blowBtn'), cs = $('#cakeStatus');
-  lightBtn.addEventListener('click', () => {
-    candles.forEach(c => c.classList.add('lit'));
-    lightBtn.disabled = true; blowBtn.disabled = false;
-    cs.textContent = 'الشموع مضيئة ✨ تمنّي أمنيتكِ ثم أطفئيها';
-  });
-  blowBtn.addEventListener('click', () => {
+  const lightBtn = $('#lightBtn'), blowBtn = $('#blowBtn'), micBtn = $('#micBtn');
+  const cs = $('#cakeStatus'), meter = $('#meter');
+  let stream = null, ctx = null, raf = null, blown = false;
+
+  function stopMic() {
+    if (raf) cancelAnimationFrame(raf);
+    raf = null;
+    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+    if (ctx) { ctx.close().catch(() => {}); ctx = null; }
+  }
+  function blowOut() {
+    if (blown) return;
+    blown = true;
+    stopMic();
     candles.forEach(c => c.classList.remove('lit'));
-    blowBtn.disabled = true;
+    blowBtn.disabled = true; micBtn.disabled = true;
+    meter.style.width = '100%';
     cs.textContent = 'عسى أن تتحقق أمنيتكِ يا حنان 🎂💖';
     $('#toEnvelope').hidden = false;
+  }
+  lightBtn.addEventListener('click', () => {
+    candles.forEach(c => c.classList.add('lit'));
+    lightBtn.disabled = true; blowBtn.disabled = false; micBtn.disabled = false;
+    cs.textContent = 'الشموع مضيئة ✨ انفخي في المايكروفون أو استخدمي الزر';
+  });
+  blowBtn.addEventListener('click', blowOut);
+
+  micBtn.addEventListener('click', async () => {
+    if (blown || stream) return;
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('unsupported');
+      stream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false }
+      });
+      const AC = window.AudioContext || window.webkitAudioContext;
+      ctx = new AC();
+      if (ctx.state === 'suspended') await ctx.resume();
+      const an = ctx.createAnalyser();
+      an.fftSize = 1024;
+      ctx.createMediaStreamSource(stream).connect(an);
+      const buf = new Uint8Array(an.fftSize);
+      let since = 0;
+      micBtn.disabled = true;
+      cs.textContent = '🎙️ المايكروفون يستمع… انفخي الآن برفق نحو الشاشة';
+      (function listen() {
+        an.getByteTimeDomainData(buf);
+        let sum = 0;
+        for (let i = 0; i < buf.length; i++) { const v = (buf[i] - 128) / 128; sum += v * v; }
+        const rms = Math.sqrt(sum / buf.length);
+        meter.style.width = Math.min(100, rms / 0.25 * 100) + '%';
+        if (rms > 0.1) {
+          since = since || performance.now();
+          if (performance.now() - since > 150) { blowOut(); return; }
+        } else { since = 0; }
+        raf = requestAnimationFrame(listen);
+      })();
+    } catch (err) {
+      stopMic();
+      micBtn.disabled = false;
+      cs.textContent = 'تعذّر تشغيل المايكروفون. يمكنكِ استخدام زر «أطفئي بالزر» 💨';
+    }
   });
 
   /* ---- Page 6: envelope ---- */
